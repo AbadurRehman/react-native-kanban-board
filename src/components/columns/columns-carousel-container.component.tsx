@@ -135,7 +135,9 @@ export class ColumnSnapContainer extends Component<Props, State> {
           horizontal={true}
           scrollEventThrottle={16}
           snapToInterval={this.props.itemWidth + COLUMN_MARGIN}
-          onMomentumScrollEnd={this.onMomentumScrollEnd}>
+          onMomentumScrollEnd={this.onMomentumScrollEnd}
+          
+          >
           {data.map((item, index) => (
             <View key={`carousel-item-${index}`} style={{ width: this.props.itemWidth, marginRight: COLUMN_MARGIN }}>
               {this.props.renderItem(item, singleDataColumnAvailable)}
@@ -143,7 +145,7 @@ export class ColumnSnapContainer extends Component<Props, State> {
           ))}
         </ScrollView>
 
-        {singleColumnDisplay &&
+        {/* {singleColumnDisplay &&
           <View style={styles.positionIndicatorContainer}>
             {data.map((_, index) => (
               <Dot
@@ -152,7 +154,7 @@ export class ColumnSnapContainer extends Component<Props, State> {
                 style={styles.positionIndicator}
               />
             ))}
-          </View>}
+          </View>} */}
       </View>
     );
   }
@@ -169,6 +171,7 @@ const styles = StyleSheet.create({
   },
   contentContainer: {
     paddingVertical: 8,
+    paddingBottom: 100
   },
   positionIndicatorContainer: {
     flexDirection: 'row',

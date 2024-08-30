@@ -176,11 +176,11 @@ export class Column extends React.Component<Props, State> {
           }]}>
         <View style={[styles.columnHeaderContainer, columnHeaderContainerStyle]}>
           <Text style={[styles.columnHeaderTitle, columnHeaderTitleStyle]}>{column.title}</Text>
-          {isWithCountBadge &&
+          {/* {isWithCountBadge &&
             <View style={styles.columnHeaderRightContainer}>
               <Badge value={noOfItems} />
             </View>
-          }
+          } */}
         </View>
 
         {columnContent}

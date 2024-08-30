@@ -5,7 +5,8 @@ import {
   View,
   LayoutChangeEvent,
   StyleProp,
-  ViewStyle
+  ViewStyle,
+  I18nManager
 } from 'react-native';
 import {
   GestureEvent,
@@ -257,14 +258,24 @@ class KanbanBoard extends React.Component<Props, State> {
         return;
       }
 
+      const RTL = I18nManager.isRTL
+
       this.dragX = event.nativeEvent.absoluteX;
       this.dragY = event.nativeEvent.absoluteY;
-
       //move dragged item
-      this.state.pan.setValue({
-        x: this.dragX - this.state.startingX - draggedItemWidth / 2,
-        y: this.dragY - this.state.startingY - draggedItemHeight / 2
-      });
+
+      if(RTL){
+        this.state.pan.setValue({
+          x: this.dragX - this.state.startingX + draggedItemWidth / 2,
+          y: this.dragY - this.state.startingY - draggedItemHeight / 2
+        });
+      }else{
+        this.state.pan.setValue({
+          x: this.dragX - this.state.startingX - draggedItemWidth / 2,
+          y: this.dragY - this.state.startingY - draggedItemHeight / 2
+        });
+      }
+     
 
       const snapMargin = 50;
       const snapAfterTimeout = 500;
@@ -273,10 +284,18 @@ class KanbanBoard extends React.Component<Props, State> {
       let shouldSnapNextOrScrollRight = false;
 
       if (event.nativeEvent.absoluteX < snapMargin) {
-        shouldSnapPrevOrScrollLeft = true;
+        if(RTL){
+          shouldSnapNextOrScrollRight = true;
+        }else{
+          shouldSnapPrevOrScrollLeft = true;
+        }
       }
       if (event.nativeEvent.absoluteX > deviceWidth - snapMargin) {
-        shouldSnapNextOrScrollRight = true;
+        if(RTL){
+          shouldSnapPrevOrScrollLeft = true;
+        }else{
+          shouldSnapNextOrScrollRight = true;
+        }
       }
 
       if (!shouldSnapPrevOrScrollLeft && !shouldSnapNextOrScrollRight && this.snapTimeout) {
@@ -506,7 +525,7 @@ class KanbanBoard extends React.Component<Props, State> {
           transform: [
             { translateX: pan.x },
             { translateY: pan.y },
-            { rotate: interpolatedRotateAnimation }
+            // { rotate: interpolatedRotateAnimation }
           ]
         }}>
         <Card
