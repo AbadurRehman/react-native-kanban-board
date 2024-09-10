@@ -111,13 +111,12 @@ export default withKanbanContext(Card);
 
 const styles = StyleSheet.create({
   container: {
-    borderColor: '#E3E3E3',
+    borderColor: '#BBBFCC',
     borderWidth: 1,
     borderRadius: 8,
     padding: 16,
     backgroundColor: '#FFFFFF',
     marginBottom: 16,
-    elevation: 3
   },
   cardHeaderContainer: {
     marginBottom: 16
