@@ -132,6 +132,13 @@ export class Column extends React.Component<Props, State> {
 
     const items = boardState.columnCardsMap.has(column.id) ? boardState.columnCardsMap.get(column.id)! : [];
     const noOfItems = items.length;
+    let totalValue = items.reduce((acc, lead) => acc + lead.tags.LeadValue, 0);
+    let totalLeadValue  = ''
+    if (totalValue >= 1000) {
+      totalLeadValue =  (totalValue / 1000).toFixed(1) + 'k';
+    }else{
+      totalLeadValue =  totalValue.toString();
+    }
 
     let columnContent;
     if (noOfItems > 0) {
@@ -175,7 +182,7 @@ export class Column extends React.Component<Props, State> {
             marginRight: singleDataColumnAvailable ? 0 : COLUMN_MARGIN
           }]}>
         <View style={[styles.columnHeaderContainer, columnHeaderContainerStyle]}>
-          <Text style={[styles.columnHeaderTitle, columnHeaderTitleStyle]}>{column.title}</Text>
+          <Text style={[styles.columnHeaderTitle, columnHeaderTitleStyle]}>{column.title} {noOfItems > 0 ?`/ ${noOfItems}` : ''}  <Text style={{color:'#6B6F80'}}>{totalValue > 0 ? `(${totalLeadValue})` : ''} </Text></Text>
           {/* {isWithCountBadge &&
             <View style={styles.columnHeaderRightContainer}>
               <Badge value={noOfItems} />
