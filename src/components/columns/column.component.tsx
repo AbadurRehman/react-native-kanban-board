@@ -132,6 +132,7 @@ export class Column extends React.Component<Props, State> {
 
     const items = boardState.columnCardsMap.has(column.id) ? boardState.columnCardsMap.get(column.id)! : [];
     const noOfItems = items.length;
+    // console.log("items--", items)
     let totalValue = items.reduce((acc, lead) => acc + lead.tags.LeadValue, 0);
     let totalLeadValue  = ''
     if (totalValue >= 1000) {
@@ -171,7 +172,6 @@ export class Column extends React.Component<Props, State> {
           <EmptyColumn />
         );
     }
-
     return (
       <View
         ref={this.setRefColumn}
@@ -182,7 +182,7 @@ export class Column extends React.Component<Props, State> {
             marginRight: singleDataColumnAvailable ? 0 : COLUMN_MARGIN
           }]}>
         <View style={[styles.columnHeaderContainer, columnHeaderContainerStyle]}>
-          <Text style={[styles.columnHeaderTitle, columnHeaderTitleStyle]}>{column.title} {noOfItems > 0 ?`/ ${noOfItems}` : ''}  <Text style={{color:'#6B6F80'}}>{totalValue > 0 ? `(${totalLeadValue})` : ''} </Text></Text>
+          <Text style={[styles.columnHeaderTitle, columnHeaderTitleStyle]}>{column.title} {noOfItems > 0 ?`/ ${noOfItems}` : ''}  <Text style={{color:'#6B6F80'}}>{totalValue > 0 ? `(AED ${totalLeadValue})` : ''} </Text></Text>
           {/* {isWithCountBadge &&
             <View style={styles.columnHeaderRightContainer}>
               <Badge value={noOfItems} />
@@ -209,10 +209,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     marginBottom: 24
   },
-  columnHeaderTitle: {
-    fontSize: 16,
-    fontWeight: 'bold'
-  },
+  columnHeaderTitle: {},
   columnHeaderRightContainer: {
   },
 });
