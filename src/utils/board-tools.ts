@@ -46,13 +46,40 @@ export class BoardTools {
     }
   }
 
-  static findColumn(boardState: BoardState, x: number): ColumnModel | undefined {
+  static findColumnIOS(boardState: BoardState, x: number): ColumnModel | undefined {
     let visibleColumns = this.getVisibleColumns(boardState);
     let column = visibleColumns.filter(col => col.dimensions && x >= col.dimensions.x && x <= col.dimensions.x + col.dimensions.width);
 
     if (column.length > 0) {
       return column[0];
     }
+
+    return undefined;
+  }
+
+  static findColumn(boardState: BoardState, x: number, prev: boolean): ColumnModel | undefined {
+    let visibleColumns = this.getVisibleColumns(boardState);
+
+    const currentColumnIndex = visibleColumns.findIndex(col => {
+      if (col.dimensions) {
+        const startX = col.dimensions.x;         // Start of the column
+        const endX = col.dimensions.x + col.dimensions.width;  // End of the column
+        return x >= startX && x <= endX;
+      }
+    });
+
+    
+    if(currentColumnIndex >= 0){
+      let column = visibleColumns[currentColumnIndex];
+    
+      const previousColumn = currentColumnIndex > 0 ? visibleColumns[currentColumnIndex - 1] : null;
+      
+      if(prev){
+        column = previousColumn
+      }
+        return column;
+    }
+   
 
     return undefined;
   }

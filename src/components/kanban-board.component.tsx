@@ -6,7 +6,8 @@ import {
   LayoutChangeEvent,
   StyleProp,
   ViewStyle,
-  I18nManager
+  I18nManager,
+  Platform
 } from 'react-native';
 import {
   GestureEvent,
@@ -284,14 +285,14 @@ class KanbanBoard extends React.Component<Props, State> {
       let shouldSnapNextOrScrollRight = false;
 
       if (event.nativeEvent.absoluteX < snapMargin) {
-        if(RTL){
+        if(RTL && Platform.OS == 'ios'){
           shouldSnapNextOrScrollRight = true;
         }else{
           shouldSnapPrevOrScrollLeft = true;
         }
       }
       if (event.nativeEvent.absoluteX > deviceWidth - snapMargin) {
-        if(RTL){
+        if(RTL && Platform.OS == 'ios'){
           shouldSnapPrevOrScrollLeft = true;
         }else{
           shouldSnapNextOrScrollRight = true;
@@ -302,8 +303,11 @@ class KanbanBoard extends React.Component<Props, State> {
         clearTimeout(this.snapTimeout);
         this.snapTimeout = undefined;
       }
+      let previous = false
 
       if (!this.snapTimeout && shouldSnapPrevOrScrollLeft) {
+        previous = true;
+
         this.snapTimeout = setTimeout(() => {
           this.carouselRef.current?.snapToPrev();
           this.snapTimeout = undefined;
@@ -313,9 +317,16 @@ class KanbanBoard extends React.Component<Props, State> {
           this.carouselRef.current?.snapToNext();
           this.snapTimeout = undefined;
         }, snapAfterTimeout);
+        
       }
 
-      const targetColumn = BoardTools.findColumn(boardState, event.nativeEvent.absoluteX);
+      let targetColumn;
+      if(Platform.OS == 'ios'){
+         targetColumn = BoardTools.findColumnIOS(boardState, event.nativeEvent.absoluteX);
+      }else{
+        targetColumn = BoardTools.findColumn(boardState, event.nativeEvent.absoluteX, previous);
+      }
+      
       if (targetColumn) {
         this.moveCard(draggedItem!, this.dragX, this.dragY, targetColumn);
         const scrollResult = BoardTools.getScrollingDirection(targetColumn, this.dragY);
