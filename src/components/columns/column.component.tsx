@@ -124,7 +124,7 @@ export class Column extends React.Component<Props, State> {
       boardState,
       oneColumnWidth,
       columnWidth,
-
+      currency,
       renderEmptyColumn,
       columnHeaderContainerStyle,
       columnHeaderTitleStyle
@@ -185,7 +185,7 @@ export class Column extends React.Component<Props, State> {
             marginRight: singleDataColumnAvailable ? 0 : COLUMN_MARGIN
           }]}>
         <View style={[styles.columnHeaderContainer, columnHeaderContainerStyle]}>
-          <Text style={[styles.columnHeaderTitle, columnHeaderTitleStyle]}>{column.title} {noOfItems > 0 ?`/ ${noOfItems}` : ''}  <Text style={{color:'#6B6F80'}}>{totalValue > 0 ? `(AED ${totalLeadValue})` : ''} </Text></Text>
+          <Text style={[styles.columnHeaderTitle, columnHeaderTitleStyle]}>{column.title} {noOfItems > 0 ?`/ ${noOfItems}` : ''}  <Text style={{color:'#6B6F80'}}>{totalValue > 0 ? `(${currency} ${totalLeadValue})` : ''} </Text></Text>
         </View>
 
         {columnContent}

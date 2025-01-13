@@ -11,6 +11,7 @@ export type KanbanContext = {
   oneColumnWidth: number;
   cardWidth: number;
   displayedColumns: number;
+  currency: string;
 };
 
 function getKanbanContext(): KanbanContext {

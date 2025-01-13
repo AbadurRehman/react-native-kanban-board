@@ -603,6 +603,7 @@ class KanbanBoard extends React.Component<Props, State> {
         deviceWidth={this.props.deviceWidth}
         isLandscape={this.props.isLandscape}
         columnWidth={this.props.columnWidth}
+        currency={this.props.currency}
         oneColumnWidth={this.props.oneColumnWidth}
         cardWidth={this.props.cardWidth}
         displayedColumns={this.props.displayedColumns}
