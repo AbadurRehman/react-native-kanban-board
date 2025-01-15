@@ -216,7 +216,7 @@ class KanbanBoard extends React.Component<Props, State> {
     }
 
     const item = BoardTools.findCardInColumn(column, this.state.boardState, event.nativeEvent.absoluteY);
-    if (!item || !item.dimensions) {
+    if (!item || !item.dimensions || !item?.tags?.is_editable) {
       return;
     }
 
