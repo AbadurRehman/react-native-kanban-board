@@ -200,7 +200,8 @@ const styles = StyleSheet.create({
   columnContainer: {
     backgroundColor: '#FFFFFF',
     borderRadius: 8,
-    padding: 8
+    padding: 8,
+    paddingRight:1,
   },
   columnHeaderContainer: {
     flexDirection: 'row',
