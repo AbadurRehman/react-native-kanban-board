@@ -8,7 +8,8 @@ import {
   Text,
   View,
   TextStyle,
-  ViewStyle
+  ViewStyle,
+  Image
 } from 'react-native';
 
 import EmptyColumn from './empty-column.component';
@@ -127,7 +128,8 @@ export class Column extends React.Component<Props, State> {
       currency,
       renderEmptyColumn,
       columnHeaderContainerStyle,
-      columnHeaderTitleStyle
+      columnHeaderTitleStyle,
+      primaryColor,
     } = this.props;
 
     const items = boardState.columnCardsMap.has(column.id) ? boardState.columnCardsMap.get(column.id)! : [];
@@ -186,6 +188,12 @@ export class Column extends React.Component<Props, State> {
           }]}>
         <View style={[styles.columnHeaderContainer, columnHeaderContainerStyle]}>
           <Text style={[styles.columnHeaderTitle, columnHeaderTitleStyle]}>{column.title} {noOfItems > 0 ?`/ ${noOfItems}` : ''}  <Text style={{color:'#6B6F80'}}>{totalValue > 0 ? `(${currency} ${totalLeadValue})` : ''} </Text></Text>
+         {column.lockIcon && <Image source={require('../../icons/lock.png')} style={{
+            width: 20,
+            height: 20,
+            resizeMode:"contain",
+            tintColor:primaryColor
+          }} />}
         </View>
 
         {columnContent}

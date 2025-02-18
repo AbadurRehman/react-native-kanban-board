@@ -11,6 +11,7 @@ export class ColumnModel {
   id: string;
   title: string;
   value: any;
+  lockIcon?: boolean
 
   get dimensions(): Rect | undefined {
     return this._rect;
@@ -34,10 +35,14 @@ export class ColumnModel {
    * @param {string} title - The title of the column.
    * @param {*} value - The value associated with the column.
    */
-  constructor(id: string, title: string, value: any) {
+  constructor(id: string, title: string, value: any, lockIcon?: boolean) {
     this.id = id;
     this.title = title;
     this.value = value;
+
+    if (lockIcon !== undefined) {
+      this.lockIcon = lockIcon;
+    }
   }
 
   setRef(ref: View | null) {

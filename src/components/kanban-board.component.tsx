@@ -607,6 +607,7 @@ class KanbanBoard extends React.Component<Props, State> {
         oneColumnWidth={this.props.oneColumnWidth}
         cardWidth={this.props.cardWidth}
         displayedColumns={this.props.displayedColumns}
+        primaryColor={this.props.primaryColor}
       />
     )
   }
