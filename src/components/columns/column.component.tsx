@@ -188,12 +188,29 @@ export class Column extends React.Component<Props, State> {
           }]}>
         <View style={[styles.columnHeaderContainer, columnHeaderContainerStyle]}>
           <Text style={[styles.columnHeaderTitle, columnHeaderTitleStyle]}>{column.title} {noOfItems > 0 ?`/ ${noOfItems}` : ''}  <Text style={{color:'#6B6F80'}}>{totalValue > 0 ? `(${currency} ${totalLeadValue})` : ''} </Text></Text>
-         {column.lockIcon && <Image source={require('../../icons/lock.png')} style={{
-            width: 20,
-            height: 20,
-            resizeMode:"contain",
-            tintColor:primaryColor
-          }} />}
+          <View style={{flexDirection:'row',alignItems:'center'}}>
+            {column.lockIcon && <Image source={require('../../icons/lock.png')} style={{
+              width: 20,
+              height: 20,
+              resizeMode:"contain",
+              tintColor:primaryColor,
+            }} />}
+
+            {column.progressive && <Image source={require('../../icons/progressive.png')} style={{
+              width: 19,
+              height: 19,
+              resizeMode:"contain",
+              tintColor:primaryColor,
+            }} />}
+
+            {column.completed && <Image source={require('../../icons/completed.png')} style={{
+              width: 23,
+              height: 23,
+              resizeMode:"contain",
+              tintColor:primaryColor,
+              marginLeft: 5
+            }} />}
+          </View>
         </View>
 
         {columnContent}
@@ -214,9 +231,10 @@ const styles = StyleSheet.create({
   columnHeaderContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginBottom: 24
+    marginBottom: 24,
   },
-  columnHeaderTitle: {},
+  columnHeaderTitle: {
+  },
   columnHeaderRightContainer: {
   },
 });

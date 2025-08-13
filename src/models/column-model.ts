@@ -12,6 +12,8 @@ export class ColumnModel {
   title: string;
   value: any;
   lockIcon?: boolean
+  progressive?: boolean
+  completed?: boolean
 
   get dimensions(): Rect | undefined {
     return this._rect;
@@ -35,13 +37,19 @@ export class ColumnModel {
    * @param {string} title - The title of the column.
    * @param {*} value - The value associated with the column.
    */
-  constructor(id: string, title: string, value: any, lockIcon?: boolean) {
+  constructor(id: string, title: string, value: any, lockIcon?: boolean, progressive?: boolean, completed?: boolean) {
     this.id = id;
     this.title = title;
     this.value = value;
 
     if (lockIcon !== undefined) {
       this.lockIcon = lockIcon;
+    }
+    if (progressive !== undefined) {
+      this.progressive = progressive;
+    }
+    if (completed !== undefined) {
+      this.completed = completed;
     }
   }
 
